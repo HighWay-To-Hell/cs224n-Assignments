@@ -41,16 +41,17 @@ def pad_sents_char(sents, char_pad_token):
     ###     You should NOT use the method `pad_sents()` below because of the way it handles 
     ###     padding and unknown words.
     max_sent_len = max(len(sent) for sent in sents)
-    for sent in sents:
-        for word in sent:
+    sents_padded = sents.copy()
+    for i, sent in enumerate(sents_padded):
+        for j, word in enumerate(sent):
             word = word[:max_word_length]
             char_pad = [char_pad_token] * max_word_length
             char_pad = char_pad[len(word):]
-            word.extend(char_pad)
+            sent[j].extend(char_pad)
         word_pad = [[char_pad_token] * max_word_length] * max_sent_len
         word_pad = word_pad[len(sent):]
-        sent.extend(word_pad)
-    sents_padded = sents
+        sents_padded[i].extend(word_pad)
+    # sents_padded = sents
     ### END YOUR CODE
 
     return sents_padded
