@@ -43,6 +43,7 @@ def pad_sents_char(sents, char_pad_token):
     max_sent_len = max(len(sent) for sent in sents)
     for sent in sents:
         for word in sent:
+            word = word[:max_word_length]
             char_pad = [char_pad_token] * max_word_length
             char_pad = char_pad[len(word):]
             word.extend(char_pad)
