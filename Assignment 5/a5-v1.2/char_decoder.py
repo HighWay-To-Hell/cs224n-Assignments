@@ -76,7 +76,7 @@ class CharDecoder(nn.Module):
         ### Hint: - Make sure padding characters do not contribute to the cross-entropy loss.
         ###       - char_sequence corresponds to the sequence x_1 ... x_{n+1} from the handout (e.g., <START>,m,u,s,i,c,<END>).
         scores, _ = self.forward(char_sequence, dec_hidden)
-        P = F.log_softmax(scores, dim=-1)
+        P = - F.log_softmax(scores, dim=-1)
         loss = torch.gather(P, index=char_sequence.unsqueeze(-1), dim=-1).squeeze()
         loss = loss.sum()
         return loss
