@@ -44,7 +44,7 @@ def pad_sents_char(sents, char_pad_token):
     sents_padded = sents.copy()
     for i, sent in enumerate(sents_padded):
         for j, word in enumerate(sent):
-            word = word[:max_word_length]
+            sents_padded[i][j] = sents_padded[i][j][:max_word_length]
             char_pad = [char_pad_token] * max_word_length
             char_pad = char_pad[len(word):]
             sents_padded[i][j].extend(char_pad)
