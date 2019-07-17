@@ -111,7 +111,7 @@ class CharDecoder(nn.Module):
             scores, dec_hidden = self.forward(input, dec_hidden)
             P = (F.softmax(scores, dim=-1)).permute(1, 0, 2)
             _, index = torch.max(P, dim=-1)
-            index = index.cpu().squeeze().numpy()
+            index = index.cpu().squeeze(dim=-1).numpy()
             for j in range(batch_size):
                 if hyp[j][-1] != '}':
                     hyp[j].append(self.target_vocab.id2char[index[j]])
